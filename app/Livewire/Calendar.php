@@ -12,6 +12,8 @@ class Calendar extends Component
     public array $arrayDate = [1,1,2024];
     public $calendarTitle = '';
 
+
+
     public function mount()
     {
         $this->arrayDate[0] = intval(date('j'));
@@ -41,6 +43,7 @@ class Calendar extends Component
         $this->day = intval(date('j'));
         $this->month = intval(date('n'));
         $this->year = intval(date('Y'));
+        $this->dispatch('change-'.$this->view,$this->arrayDate);
     }
     public function switchView(string $view)
     {

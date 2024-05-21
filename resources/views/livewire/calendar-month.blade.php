@@ -2,7 +2,7 @@
     <div
         class="grid grid-cols-7 gap-px border-b border-gray-300 bg-gray-200 text-center text-xs font-semibold leading-6 text-gray-700 lg:flex-none">
         <div class="flex justify-center bg-white py-2">
-            <span class="sr-only sm:not-sr-only">Mon</span>
+            <span class="sr-only sm:not-sr-only">Mon {{$testVar}}</span>
         </div>
         <div class="flex justify-center bg-white py-2">
             <span class="sr-only sm:not-sr-only">Tue</span>
@@ -35,7 +35,14 @@
                     <time datetime="{{$CalendarMonthDay['date']}}"
                           class="{{($CalendarMonthDay['today']?'flex h-6 w-6 items-center justify-center rounded-full bg-indigo-600 font-semibold text-white':'')}}">
                         {{$CalendarMonthDay['currentDay']}}
-                        {{$CalendarMonthDay['day']}}
+                        <ol class="mt-2">
+                            <li>
+                                <a href="#" class="group flex">
+                                    <p class="flex-auto truncate font-medium text-gray-900 group-hover:text-indigo-600">Sam's birthday party</p>
+                                    <time datetime="2022-01-25T14:00" class="ml-3 hidden flex-none text-gray-500 group-hover:text-indigo-600 xl:block">2PM</time>
+                                </a>
+                            </li>
+                        </ol>
                     </time>
                 </div>
             @else

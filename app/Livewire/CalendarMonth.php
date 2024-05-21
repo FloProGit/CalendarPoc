@@ -14,6 +14,8 @@ class CalendarMonth extends Component
     public $monthSelected = 1;
     public $yearSelected = 2024;
 
+
+    public $testVar;
     protected $listeners = [
         'refreshParent' => '$refresh'
     ];
@@ -23,10 +25,6 @@ class CalendarMonth extends Component
         $this->monthSelected =$arrayDate[1];
         $this->yearSelected =$arrayDate[2];
         $this->currentDate = mktime(12, 0, 0, $this->monthSelected, $this->daySelected, $this->yearSelected);
-//        $this->setThisDay();
-//        $time = mktime(12, 0, 0, $this->monthSelected, $this->daySelected, $this->yearSelected);
-//        $this->currentDate = new DateTime('2009-09-30 20:24:00');
-//        $this->GenerateDay();
 
         $this->GenerateMonth();
     }
@@ -77,8 +75,9 @@ class CalendarMonth extends Component
         $numberOfDayInCurrentMonth = date('j', $lastDayOfMonth);
         $numberOfCurrentMonth = date('m', $lastDayOfMonth);
         $numberYearOfCurrentMonth = date('Y', $lastDayOfMonth);
+
         //LAST
-        $lastDayOfLastMonth = strtotime('last day of Last month');
+        $lastDayOfLastMonth = strtotime('last day of previous month',$list[0]);
         $numberOfDayInLastMonth = date('j', $lastDayOfLastMonth);
         $numberOfLastMonth = date('m', $lastDayOfLastMonth);
         $numberYearOfLastMonth = date('Y', $lastDayOfMonth);
@@ -88,7 +87,6 @@ class CalendarMonth extends Component
         $startCalendarDay = intval($numberOfDayInLastMonth) - $numberOfDayBefore;
 
         $CurrentDayCompare = date('j/m/Y');
-//        $this->varTest = json_encode($list);
 
 
         for ($i = 1; $i <= $numberOfDayBefore; $i++) {
