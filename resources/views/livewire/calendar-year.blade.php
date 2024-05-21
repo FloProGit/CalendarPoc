@@ -1,8 +1,7 @@
 <div>
     <div class="bg-white">
         <div class="mx-auto grid max-w-3xl grid-cols-1 gap-x-8 gap-y-16 px-4 py-16 sm:grid-cols-2 sm:px-6 xl:max-w-none xl:grid-cols-3 xl:px-8 2xl:grid-cols-4">
-
-            ///https://www.geeksforgeeks.org/return-all-dates-between-two-dates-in-an-array-in-php/
+            @dd($test)
             @for($i = 0 ; $i < 12 ;$i++)
                 <section class="text-center">
                     <h2 class="text-sm font-semibold text-gray-900">January</h2>
