@@ -12,7 +12,12 @@ class Calendar extends Component
     public array $arrayDate = [1,1,2024];
     public $calendarTitle = '';
 
-
+    public function mount()
+    {
+        $this->arrayDate[0] = intval(date('j'));
+        $this->arrayDate[1] = intval(date('n'));
+        $this->arrayDate[2] = intval(date('Y'));
+    }
     public function updateTimeData($number)
     {
         $currentDate = mktime(12, 0, 0, $this->arrayDate[1], $this->arrayDate[0], $this->arrayDate[2]);

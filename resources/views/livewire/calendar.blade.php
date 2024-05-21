@@ -146,8 +146,6 @@
 
 
     @switch($view)
-
-
         @case('day')
             <livewire:calendar-day title="day" :arrayDate="$arrayDate"/>
             @break
