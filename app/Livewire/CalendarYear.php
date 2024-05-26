@@ -14,12 +14,8 @@ class CalendarYear extends Component
     public $test;
 
 
-    public function mount(){
-        $this->calendarYear = $this->getDatesForYear(2024);
-
-
-//        $this->test = date('j',strtotime('last monday of this year' ,mktime(12, 0, 0, 12, 31, 2023)));
-
+    public function mount($arrayDate){
+        $this->calendarYear = $this->getDatesForYear($this->yearSelected =$arrayDate[2]);
     }
     function getDatesForYear($currentAskedYear) {
         $lastMonday = date('j',strtotime('last monday of this year' ,mktime(12, 0, 0, 12, 31, ($currentAskedYear-1))));
@@ -43,42 +39,52 @@ class CalendarYear extends Component
         $startWeek = new DateTime($start);
 
         $CurrentWeek = 1;
-        $currentMonth = 0;
-        for($i=0;$i<12;$i++){
+        $currentMonth = 1;
+        $lastMondayWeek = clone $startWeek;
 
+        for($i=0;$i<12;$i++){
+            $first = true;
+            $count = 0;
             for($j=0;$j<6;$j++){
+                if ($j===0) {
+                    $startWeek = clone $lastMondayWeek;
+                }
                 $endWeek = clone $startWeek;
                 $endWeek->modify('+7 day');
                 $period = new DatePeriod($startWeek, $interval, $endWeek);
+
                 foreach($period as $date) {
                     $currentMonth = $date->format('n');
                     $currentYear = $date->format('Y');
                     $currentDayWeek =$date->format('w');
-                    $array[$i+1][] = [$date->format('N'),$date->format('j'),$currentMonth,$currentYear];
-                    $lastMondayWeek = clone $startWeek;
+                    $array[$i+1][] = [$date->format('N'),$date->format('j'),$currentMonth,$currentYear ];
+
+
+
+
+
+                    if (intval($currentMonth) > $i+1  ) {
+                        if ($j === 5 &&  $date->format('N') === '1')
+                        {
+                            $lastMondayWeek = clone $startWeek;
+                            //valeur test
+                            //$array[$i+1][$count][] = true;
+
+                            if(intval($date->format('j') ) > 1)
+                            {
+                                $lastMondayWeek->modify('-7 day');
+                            }
+                        }
+                        elseif ($j === 5 &&  intval($date->format('N')) < 4 &&  intval($date->format('j'))===1)
+                        {
+                            $lastMondayWeek = clone $startWeek;
+                        }
+
+                    }
                 }
-                if (intval($currentMonth) !== $i+1)
-                {
-                    $j = 6;
-                }
-                $startWeek->modify('+7 day');
+                    $startWeek->modify('+7 day');
             }
         }
-        dd($array);
-
-
-
-
-        // Use loop to store date into array
-        $currentLastMonday = $start;
-
-//        foreach($period as $date) {
-//            $currentMonth = $date->format('n');
-//            $currentYear = $date->format('Y');
-//            $array[$currentYear][$currentMonth][] = [$date->format('N'),$date->format('j'),$currentMonth,$currentYear];
-//        }
-
-
 
         // Return the array elements
         return $array;
